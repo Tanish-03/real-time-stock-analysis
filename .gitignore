@@ -1,0 +1,14 @@
+# Ignore Python venv
+venv/
+.env
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore Airflow logs
+infra/logs/
+
+# Ignore system files
+.DS_Store
+*.log

@@ -12,13 +12,13 @@ MINIO_SECRET_KEY = "password123"
 BUCKET = "bronze-transactions"
 LOCAL_DIR = "/tmp/minio_downloads"
 
-SNOWFLAKE_USER = "TANISH2003"
-SNOWFLAKE_PASSWORD = "Tan@12345@ish@"
-SNOWFLAKE_ACCOUNT = "jd81171.ap-southeast-1"
+SNOWFLAKE_USER = "USERNAME"
+SNOWFLAKE_PASSWORD = "PASSWORD"
+SNOWFLAKE_ACCOUNT = "ACCOUNT"
 SNOWFLAKE_WAREHOUSE = "COMPUTE_WH"
 SNOWFLAKE_DB = "STOCKS_MDS"
 SNOWFLAKE_SCHEMA = "COMMON"
-SNOWFLAKE_TABLE = "BRONZE_STOCKS_QUOTES_RAW"   # ✅ correct name
+SNOWFLAKE_TABLE = "BRONZE_STOCKS_QUOTES_RAW"   # 
 
 
 def download_from_minio():
@@ -39,7 +39,7 @@ def download_from_minio():
         key = obj["Key"]
         local_file = os.path.join(LOCAL_DIR, os.path.basename(key))
         s3.download_file(BUCKET, key, local_file)
-        print(f"✅ Downloaded {key} -> {local_file}")
+        print(f"Downloaded {key} -> {local_file}")
         local_files.append(local_file)
 
     print("DEBUG - Local files returned:", local_files)
@@ -49,7 +49,7 @@ def download_from_minio():
 def load_to_snowflake(**kwargs):
     local_files = kwargs["ti"].xcom_pull(task_ids="download_minio")
     if not local_files:
-        print("⚠️ No files to load.")
+        print("No files to load.")
         return
 
     conn = snowflake.connector.connect(
@@ -82,7 +82,7 @@ def load_to_snowflake(**kwargs):
             FILE_FORMAT = (TYPE=JSON STRIP_OUTER_ARRAY=TRUE);
             """
         )
-        print("✅ COPY INTO executed successfully")
+        print("COPY INTO executed successfully")
     finally:
         cur.close()
         conn.close()

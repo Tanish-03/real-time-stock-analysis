@@ -5,7 +5,7 @@ import json
 from kafka import KafkaProducer
 
 #define variables for API
-API_KEY="d3ao1ohr01qrtc0d24fgd3ao1ohr01qrtc0d24g0"
+API_KEY="api_key"
 BASE_URL= "https://finnhub.io/api/v1/quote"
 SYMBOLS=["AAPL","MSFT","TSLA","GOOGL","AMZN"]
 
